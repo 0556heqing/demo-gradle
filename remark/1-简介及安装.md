@@ -1,0 +1,47 @@
+# [Gradle](https://docs.gradle.org/current/userguide/userguide.html)
+
+------
+## 什么是 Gradle
+Gradle是一个基于Apache Ant和Apache Maven概念的项目自动化构建工具。它使用一种基于Groovy的特定领域语言来声明项目设置，而不是传统的XML。Gradle就是工程的管理，帮我们做了依赖、打包、部署、发布、各种渠道的差异管理等工作。
+> - [x] 一个像 ant 一样，通用的灵活的构建工具
+> - [x] 一种可切换的，像 maven 一样的基于约定约定优于配置的构建框架
+> - [x] 强大的多工程构建支持
+> - [x] 强大的依赖管理(基于 ApacheIvy)
+> - [x] 对已有的 maven 和 ivy 仓库的全面支持
+> - [x] 支持传递性依赖管理，而不需要远程仓库或者 pom.xml 或者 ivy 配置文件
+> - [x] ant 式的任务和构建是 gradle 的第一公民
+> - [x] 基于 groovy，其 build 脚本使用 groovy dsl 编写
+> - [x] 具有广泛的领域模型支持项目构建
+
+---
+## 安装
+
+###先决条件
+Gradle 需要 1.5 或更高版本的 JDK。Gradle 自带了 Groovy 库，所以不需要安装 Groovy。Gradle 会忽略已经安装的 Groovy。Gradle 会使用 path (这里的"path"应该是指 PATH 环境变量。) 中的 JDK(可以使用 java -version 检查)。当然，你可以配置 JAVA_HOME 环境变量来指向 JDK 的安装目录。
+
+###下载
+从 Gralde 官方网站下载 Gradle 的最新发行包。下载地址：https://services.gradle.org/distributions/
+
+###解压
+Gradle 发行包是一个 ZIP 文件。完整的发行包包括以下内容(官方发行包有 full 完整版，也有不带源码和文档的版本，可根据需求下载。)
+> * Gradle 可执行文件
+> * 用户手册 (有 PDF 和 HTML 两种版本)
+> * DSL 参考指南
+> * API 手册(Javadoc 和 Groovydoc)
+> * 样例，包括用户手册中的例子，一些完整的构建样例和更加复杂的构建脚本
+> * 源代码。仅供参考使用,如果你想要自己来编译 Gradle 你需要从源代码仓库中检出发行版本源码，具体请查看 Gradle 官方主页。
+
+###配置环境变量
+运行 gradle 必须将 GRADLE_HOME/bin 加入到你的 PATH 环境变量中。
+[我的电脑] -> [属性] -> [高级系统设置] -> [环境变量] -> [系统变量] -> [新建]
+```
+变量名（GRADLE_HOME）
+变量值（解压路径，例 D:\Program Files\gradle-5.6.4）
+```
+-> [编辑Path变量] -> [末尾添加 %GRADLE_HOME%\bin\;]
+
+###测试安装
+运行如下命令来检查是否安装成功.该命令会显示当前的 JVM 版本和 Gradle 版本。
+```
+gradle -v 
+```

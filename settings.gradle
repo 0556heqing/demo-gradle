@@ -1,3 +1,4 @@
 rootProject.name = 'demo_gradle'
 include 'gradle_service'
+include 'gradle-web'
 

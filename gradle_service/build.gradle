@@ -1,4 +1,7 @@
-apply plugin: 'java'
+plugins {
+    id 'java'
+    id 'maven'
+}
 
 group 'com.heqing.demo.gradle'
 // 修改项目的版本号
@@ -10,6 +13,38 @@ sourceCompatibility = 1.8
 // 设置仓库
 repositories {
     mavenCentral()
+
+    // 远程私有Maven仓库（第三方仓库）
+    maven{url 'http://maven.yiyaowang.com/nexus/content/groups/public/'}
+}
+
+// 上传到远程私有Maven仓库（第三方仓库）
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: "http://maven.yiyaowang.com/nexus/content/repositories/snapshots") {
+            authentication(userName: "wangtao", password: "yyw,123")
+            pom.project {
+                groupId = 'com.yz.demo.gradle'    // 不填默认定义的group
+                artifactId = 'gradle_service'     // 不填默认 项目名
+                version = '1.1-SNAPSHOT'  // 不填默认定义的version版本
+            }
+        }
+    }
+}
+
+// 定义三方版本号
+ext {
+    yz_version = '1.0-SNAPSHOT'
+    fastjson_version = '1.2.68'
+    junit_version = '4.12'
+}
+// 引用依赖的第三方类库
+dependencies {
+    // 构建应用程序所需的依赖项组
+    compile (group: 'com.alibaba', name: 'fastjson', version: '1.+')
+    compile('com.yz.wechat:yz-wechat-api:'+yz_version)
+    // 只需要进行测试的依赖项
+    testCompile('junit:junit:latest.integration')
 }
 
 // 将主类头添加到JAR文件的清单中

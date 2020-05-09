@@ -8,9 +8,9 @@ ext {
 dependencies {
     // 构建应用程序所需的依赖项组
     compile (group: 'com.alibaba', name: 'fastjson', version: '1.+')
-    compile('com.yz.wechat:yz-wechat-api:'+yz_version)
+    compile('com.yz.wechat:yz-wechat-api:latest.integration')
     // 只需要进行测试的依赖项
-    testCompile('junit:junit:latest.integration')
+    testCompile('junit:junit:'+junit_version)
 }
 
 // 将主类头添加到JAR文件的清单中

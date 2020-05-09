@@ -2,22 +2,55 @@ plugins {
     id 'java'
 }
 
-group 'com.heqing.demo.gradle'
-version '1.0-SNAPSHOT'
-
-// 指定编译编译.java文件的jdk版本
-sourceCompatibility = 1.8
-// 确保class文件与targetCompatibility指定版本，或者更新的java虚拟机兼容
-targetCompatibility = 1.8
-// java编译的时候缺省状态下会因为中文字符而失败
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
-// 编译JAVA文件时采用UTF-8
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+ext {
+    projectConfig = ['groupId': 'com.heqing.demo.gradle', 'version': '1.0-SNAPSHOT']
+    mavenConfig = ['userName': 'wangtao', 'passWord': 'yyw,123']
 }
 
-repositories {
-    mavenCentral()
+// 定义项目特有的行为
+project(':gradle_service') {
+    apply plugin: 'java'
+}
+project(':gradle-web') {
+    apply plugin: 'war'
+}
+
+// 定义所有项目共同行为
+allprojects {
+    group = projectConfig.groupId
+    version = projectConfig.version
+    // 指定编译编译.java文件的jdk版本
+    sourceCompatibility = 1.8
+    // 确保class文件与targetCompatibility指定版本，或者更新的java虚拟机兼容
+    targetCompatibility = 1.8
+    // java编译的时候缺省状态下会因为中文字符而失败
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+    // 编译JAVA文件时采用UTF-8
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+}
+
+// 定义子项目共同行为
+subprojects {
+    // 添加插件
+    apply plugin: 'maven'
+
+    // 设置仓库
+    repositories {
+        mavenCentral()
+
+        // 远程私有Maven仓库（第三方仓库）
+        maven{url 'http://maven.yiyaowang.com/nexus/content/groups/public/'}
+    }
+
+    // 上传到远程私有Maven仓库（第三方仓库）
+    uploadArchives {
+        repositories.mavenDeployer {
+            repository(url: "http://maven.yiyaowang.com/nexus/content/repositories/snapshots") {
+                authentication(userName: mavenConfig.userName, password: mavenConfig.passWord)
+            }
+        }
+    }
 }
 

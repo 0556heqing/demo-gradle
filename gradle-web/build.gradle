@@ -1,12 +1,5 @@
 plugins {
-    id 'war'
     id 'org.akhikhl.gretty' version '2.0.0'
-}
-
-version '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
 }
 
 gretty  {
@@ -17,6 +10,8 @@ gretty  {
 }
 
 dependencies {
+    //声明编译期依赖项目repository
+    compile project(':gradle_service')
     providedCompile 'javax.servlet:servlet-api:2.5'
     runtime 'javax.servlet:jstl:1.1.2'
 }

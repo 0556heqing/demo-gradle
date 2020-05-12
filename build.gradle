@@ -8,7 +8,7 @@ ext {
 }
 
 // 定义项目特有的行为
-project(':gradle_service') {
+project(':gradle-service') {
     apply plugin: 'java'
 }
 project(':gradle-web') {

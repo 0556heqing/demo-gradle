@@ -1,4 +1,4 @@
-rootProject.name = 'demo_gradle'
-include 'gradle_service'
+rootProject.name = 'demo-gradle'
+include 'gradle-service'
 include 'gradle-web'
 

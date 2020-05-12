@@ -11,7 +11,7 @@ gretty  {
 
 dependencies {
     //声明编译期依赖项目repository
-    compile project(':gradle_service')
+    compile project(':gradle-service')
     providedCompile 'javax.servlet:servlet-api:2.5'
     runtime 'javax.servlet:jstl:1.1.2'
 }

@@ -4,7 +4,7 @@ plugins {
 
 ext {
     projectConfig = ['groupId': 'com.heqing.demo.gradle', 'version': '1.0-SNAPSHOT']
-    mavenConfig = ['userName': 'wangtao', 'passWord': 'yyw,123']
+    mavenConfig = ['userName': '***', 'passWord': '***']
 }
 
 // 定义项目特有的行为
@@ -41,13 +41,13 @@ subprojects {
         mavenCentral()
 
         // 远程私有Maven仓库（第三方仓库）
-        maven{url 'http://maven.yiyaowang.com/nexus/content/groups/public/'}
+        maven{url 'http://maven.***.com/nexus/content/groups/public/'}
     }
 
     // 上传到远程私有Maven仓库（第三方仓库）
     uploadArchives {
         repositories.mavenDeployer {
-            repository(url: "http://maven.yiyaowang.com/nexus/content/repositories/snapshots") {
+            repository(url: "http://maven.***.com/nexus/content/repositories/snapshots") {
                 authentication(userName: mavenConfig.userName, password: mavenConfig.passWord)
             }
         }
